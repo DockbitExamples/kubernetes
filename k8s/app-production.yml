@@ -23,3 +23,20 @@ spec:
         ports:
         - name: kubeapp
           containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kubeapp-production-service
+  labels:
+    app: kubeapp
+    env: production
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: kubeapp
+    env: production
