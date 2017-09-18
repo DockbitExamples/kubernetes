@@ -1,14 +1,12 @@
 kind: Ingress
 apiVersion: extensions/v1beta1
 metadata:
-  name: test-ingress
-  annotations:
-    ingress.kubernetes.io/rewrite-target: /
+  name: app-ingress
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /test
-        backend:
-          serviceName: kubeapp-production-service
-          servicePort: 80
+ rules:
+ - http:
+     paths:
+     - path: /*
+       backend:
+         serviceName: kubeapp-production-service
+         servicePort: 80
