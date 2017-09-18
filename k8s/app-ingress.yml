@@ -10,3 +10,11 @@ spec:
        backend:
          serviceName: kubeapp-production-service
          servicePort: 80
+     - path: /canary/*
+       backend:
+         serviceName: kubeapp-canary-service
+         servicePort: 80
+     - path: /canary
+       backend:
+         serviceName: kubeapp-canary-service
+         servicePort: 80
