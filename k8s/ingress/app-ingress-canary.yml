@@ -6,6 +6,10 @@ spec:
  rules:
  - http:
      paths:
+     - path: /*
+       backend:
+         serviceName: kubeapp-production-service
+         servicePort: 80
      - path: /canary/*
        backend:
          serviceName: kubeapp-canary-service
