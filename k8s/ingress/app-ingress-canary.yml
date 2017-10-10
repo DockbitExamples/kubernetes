@@ -3,18 +3,16 @@ apiVersion: extensions/v1beta1
 metadata:
   name: app-ingress
 spec:
- rules:
- - http:
-     paths:
-     - path: /*
-       backend:
-         serviceName: kubeapp-production-service
-         servicePort: 80
-     - path: /canary/*
-       backend:
-         serviceName: kubeapp-canary-service
-         servicePort: 80
-     - path: /canary
-       backend:
-         serviceName: kubeapp-canary-service
-         servicePort: 80
+  rules:
+  - host: canary.foo.bar
+    http:
+      paths:
+      - backend:
+          serviceName: kubeapp-canary-service
+          servicePort: 80
+  - host: foo.bar
+    http:
+      paths:
+      - backend:
+          serviceName: kubeapp-production-service
+          servicePort: 80
