@@ -3,6 +3,9 @@ apiVersion: extensions/v1beta1
 metadata:
   name: app-ingress
 spec:
+  backend:
+    serviceName: kubeapp-production-service
+    servicePort: 80
   rules:
   - host: canary.foo.bar
     http:
