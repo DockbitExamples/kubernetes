@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: kubeapp
-        image: dockbit/kubeapp:1.0
+        image: gcr.io/PROJECT_ID/app:latest
         imagePullPolicy: Always
         readinessProbe:
           httpGet:
