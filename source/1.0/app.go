@@ -1,6 +1,8 @@
 package main
 
 import (
+	"io/ioutil"
+        "log"
 	"fmt"
 	"net/http"
 )
@@ -8,7 +10,19 @@ import (
 const version string = "1.0"
 
 func getFrontpage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Congratulations! Version %s of your application is running on Kubernetes.", version)
+	resp, err := http.Get("http://kubeapp-canary-service/")
+	if err != nil {
+	// handle error
+		log.Fatalln(err)
+	}	
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+        if err != nil {
+        // handle error
+		log.Fatalln(err)
+        }
+
+	fmt.Fprintf(w, "Congratulations! Version %s of your application is running on Kubernetes. \n from canary:\n %s", version, string(body))
 }
 
 func health(w http.ResponseWriter, r *http.Request) {
