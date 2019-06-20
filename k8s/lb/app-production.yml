@@ -13,8 +13,8 @@ spec:
     spec:
       containers:
       - name: kubeapp
-        image: gcr.io/PROJECT_ID/app:1.0
-        imagePullPolicy: Always
+        image: app1:1
+        imagePullPolicy: Never
         readinessProbe:
           httpGet:
             path: /health

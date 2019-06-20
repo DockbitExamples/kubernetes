@@ -1,35 +1,35 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: kubeapp-production
+  name: kubeapp-production1
 spec:
   replicas: 3
   template:
     metadata:
-      name: kubeapp
+      name: kubeapp1
       labels:
-        app: kubeapp
+        app: kubeapp1
         env: production
     spec:
       containers:
-      - name: kubeapp
-        image: harbor.jpe1-apv1-prod.r-local.net/travel-poc/canary:1.1
-        imagePullPolicy: Always
+      - name: kubeapp1
+        image: app2:1
+        imagePullPolicy: Never
         readinessProbe:
           httpGet:
             path: /health
             port: 8080
         command: ["/app"]
         ports:
-        - name: kubeapp
+        - name: kubeapp1
           containerPort: 8080
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: kubeapp-production-service
+  name: kubeapp-production-service1
   labels:
-    app: kubeapp
+    app: kubeapp1
     env: production
 spec:
   type: NodePort
@@ -37,5 +37,5 @@ spec:
   - port: 80
     targetPort: 8080
   selector:
-    app: kubeapp
+    app: kubeapp1
     env: production
